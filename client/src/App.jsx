@@ -20,6 +20,8 @@ const App = () => {
           <Route path='/builder/:id' element = {<BuilderPage/>} />
           <Route path='/preview/:id' element = {<PreviewPage/>} />
       </Route>
+
+      <Route path = '*' element = {<Navigate to ='/' replace />} />
     </Routes>
   )
 }
