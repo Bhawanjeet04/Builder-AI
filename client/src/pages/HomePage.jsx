@@ -3,7 +3,7 @@ import { useAppContext } from '../context/AppContext'
 import PromptInput from '../components/PromptInput'
 import { homeTags } from '../assets/assets'
 import { useNavigate } from 'react-router-dom'
-import {ClockIcon,Trash2Icon,ArrowRightIcon} from 'lucide-react'
+import { ClockIcon, Trash2Icon, ArrowRightIcon } from 'lucide-react'
 import moment from 'moment'
 
 const HomePage = () => {
@@ -90,14 +90,14 @@ const HomePage = () => {
 
                     <div className="flex items-center gap-2">
                       <button
-                        onClick={(e)=>{
+                        onClick={(e) => {
                           e.stopPropagation();
                           handleDelete(p._id)
                         }}
                         className='p-1.5 rounded-md text-zinc-200 hover:text-red-400 hover:bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity'>
-                        <Trash2Icon size={14}/>
+                        <Trash2Icon size={14} />
                       </button>
-                      <ArrowRightIcon size={14} className="text-zinc-200 group-hover:text-white"/>
+                      <ArrowRightIcon size={14} className="text-zinc-200 group-hover:text-white" />
                     </div>
 
                   </div>
