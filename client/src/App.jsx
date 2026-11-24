@@ -21,7 +21,7 @@ const App = () => {
           <Route path='/preview/:id' element = {<PreviewPage/>} />
       </Route>
 
-      <Route path = '*' element = {<Navigate to ='/' replace />} />
+      {/* <Route path = '*' element = {<Navigate to ='/' replace />} /> */}
     </Routes>
   )
 }
