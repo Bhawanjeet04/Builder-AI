@@ -1,5 +1,5 @@
 import { Project } from "../models/Project.js";
-import { generateProject } from "../services/aiService.js"; // Adjust path/filename if needed
+import { generateProject } from "../services/ai.js"; // Adjust path/filename if needed
 import crypto from "crypto";
 
 function hashContent(content) {

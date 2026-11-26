@@ -17,7 +17,7 @@ const PreviewPage = () => {
       loadProject(id)
     }
 
-  }, [id])
+  }, [id, loadProject])
 
   if (loading || !project) {
     return <Loading />

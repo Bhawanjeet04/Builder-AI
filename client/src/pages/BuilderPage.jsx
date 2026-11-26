@@ -30,7 +30,17 @@ const BuilderPage = () => {
   useEffect(() => {
     if (!id) return;
     loadProject(id)
-  }, [id])
+  }, [id, loadProject])
+
+  useEffect(() => {
+    if (!id || !["pending", "generating", "revising"].includes(activeProject?.status)) return;
+
+    const intervalId = window.setInterval(() => {
+      loadProject(id, true)
+    }, 2500)
+
+    return () => window.clearInterval(intervalId)
+  }, [id, activeProject?.status, loadProject])
 
 
 

@@ -98,7 +98,7 @@ export function AppContextProvider({ children }) {
         }
     }
 
-    const loadProject = async (id, silent = false) => {
+    const loadProject = useCallback(async (id, silent = false) => {
         if (!user) return;
         if (!silent) setLoadingActiveProject(true)
         try {
@@ -123,7 +123,7 @@ export function AppContextProvider({ children }) {
         } finally {
             if (!silent) setLoadingActiveProject(false)
         }
-    }
+    }, [user, navigate])
 
     const handleGenerate = useCallback(
         async (prompt) => {
