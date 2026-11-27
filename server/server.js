@@ -7,10 +7,16 @@ import authRouter from "./routes/authRoutes.js";
 import projectRouter from "./routes/projectRoutes.js";
 
 const app = express();
+app.set("trust proxy", 1);
 
 await connectToDatabase()
 
-app.use(cors({ origin: process.env.ORIGINS.split(","), credentials: true }))
+const allowedOrigins = (process.env.ORIGINS || "")
+    .split(",")
+    .map((origin) => origin.trim().replace(/\/+$/, ""))
+    .filter(Boolean);
+
+app.use(cors({ origin: allowedOrigins, credentials: true }))
 app.use(cookieParser())
 app.use(express.json())
 
@@ -27,5 +33,5 @@ app.use((err, _req, res, _next) => {
 const port = process.env.PORT || 3000;
 
 app.listen(port, () => {
-    console.log(`Server is running at http://localhost:${port}`)
+    console.log(`Server is running`)
 })

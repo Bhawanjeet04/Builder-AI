@@ -2,17 +2,18 @@ import { User } from "../models/User.js";
 import jwt from 'jsonwebtoken'
 
 const JWT_SECRET = process.env.JWT_SECRET || "fallback_secret"
+const SESSION_COOKIE_OPTIONS = {
+    httpOnly: true,
+    secure: true,
+    sameSite: "none",
+    maxAge: 7 * 24 * 60 * 60 * 1000,
+    path: "/"
+}
 
 // Helper to set cookie
 const setSessionCookie = (res, payload) => {
-    const token = jwt.sign(payload, JWT_SECRET, { expiresIn: "30d" })
-    res.cookie('token', token, {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
-        sameSite: "lax",
-        maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
-        path: "/"
-    })
+    const token = jwt.sign(payload, JWT_SECRET, { expiresIn: "7d" })
+    res.cookie('token', token, SESSION_COOKIE_OPTIONS)
 }
 
 export async function register(req, res) {
@@ -80,13 +81,7 @@ export async function login(req, res) {
 }
 
 export async function logout(_req, res) {
-    res.cookie("token", "", {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
-        sameSite: "lax",
-        maxAge: 0,
-        path: "/",
-    })
+    res.clearCookie("token", SESSION_COOKIE_OPTIONS)
     res.json({ success: true })
 }
 
